@@ -1,8 +1,8 @@
 import 'package:bookly/core/utils/app_assets.dart';
+import 'package:bookly/core/utils/routes.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 
-import '../../../../home/presentation/views/home_view.dart';
 import 'animated_text.dart';
 
 class SplashBody extends StatefulWidget {
@@ -28,7 +28,7 @@ class _SplashBodyState extends State<SplashBody>
   void navigateToHome() {
     Future.delayed(
       Duration(seconds: 3),
-      () => Get.to(transition: Transition.fadeIn, () => HomeView()),
+      () => GoRouter.of(context).push(AppRouter.kHomeView),
     );
   }
 
@@ -57,11 +57,9 @@ class _SplashBodyState extends State<SplashBody>
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       mainAxisAlignment: MainAxisAlignment.center,
-
       children: [
         Image.asset(AppAssets.logo),
         SizedBox(height: 5),
-
         AnimatedText(controller: _controller, slideAnimation: slideAnimation),
       ],
     );
