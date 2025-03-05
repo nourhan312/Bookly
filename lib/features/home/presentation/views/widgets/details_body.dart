@@ -14,17 +14,22 @@ class DetailsBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(16.0),
+      padding: const EdgeInsets.symmetric(
+        horizontal: 20,
+        vertical: 8,
+      ),
       child: Column(
         children: [
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.07,
           ),
           DetailsAppbar(),
-          const SizedBox(height: 20),
-          ListviewItem(),
+          const SizedBox(height: 10),
+          ListviewItem(
+            widthRatio: 0.45,
+          ),
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.04,
+            height: MediaQuery.of(context).size.height * 0.02,
           ),
           Text(
             'Book Title',

@@ -3,6 +3,7 @@ import 'package:bookly/Features/home/presentation/views/home_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../features/search/presentation/view/search_view.dart';
 import '../../features/splash/presentation/views/splash_screen.dart';
 
 abstract class AppRouter {
@@ -20,6 +21,8 @@ abstract class AppRouter {
         path: kHomeView,
         builder: (context, state) => const HomeView(),
       ),
+      GoRoute(
+          path: kSearchView, builder: (context, state) => const SearchView()),
       GoRoute(
         path: kBookDetailsView,
         builder: (context, state) => const BookDetailsView(),
