@@ -14,8 +14,7 @@ class HomeRepoImpl implements HomeRepo {
   Future<Either<Failure, List<Book>>> getFeaturesBooks() async {
     try {
       var data = await apiServer.get(
-          endpoint:
-              'volumes?Filtering=free-ebooks&q=subject:programming&Sorting=newest');
+          endpoint: 'volumes?Filtering=free-ebooks&q=subject:programming');
       List books = data['items'];
       return Right(books.map((e) => Book.fromJson(e)).toList());
     } catch (e) {
@@ -24,7 +23,15 @@ class HomeRepoImpl implements HomeRepo {
   }
 
   @override
-  Future<Either<Failure, List<Book>>> getNewestBooks() {
-    throw UnimplementedError();
+  Future<Either<Failure, List<Book>>> getNewestBooks() async {
+    try {
+      var data = await apiServer.get(
+          endpoint:
+              'volumes?Filtering=free-ebooks&q=subject:programming&Sorting=newest');
+      List books = data['items'];
+      return Right(books.map((e) => Book.fromJson(e)).toList());
+    } catch (e) {
+      return Left(ServerFailure(e.toString()));
+    }
   }
 }
