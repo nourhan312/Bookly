@@ -26,6 +26,8 @@ class DetailsBody extends StatelessWidget {
           DetailsAppbar(),
           const SizedBox(height: 10),
           ListviewItem(
+            imageUrl:
+                'https://img-s-msn-com.akamaized.net/tenant/amp/entityid/BB1rlNr7.img?w=768&h=513&m=6&x=426&y=117&s=140&d=140',
             widthRatio: 0.45,
           ),
           SizedBox(

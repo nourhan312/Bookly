@@ -12,7 +12,9 @@ class MostLikeSection extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) => Padding(
           padding: const EdgeInsets.all(8.0),
-          child: ListviewItem(),
+          child: ListviewItem(
+              imageUrl:
+                  'https://img-s-msn-com.akamaized.net/tenant/amp/entityid/BB1rlNr7.img?w=768&h=513&m=6&x=426&y=117&s=140&d=140'),
         ),
       ),
     );
