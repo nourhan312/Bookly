@@ -1,11 +1,12 @@
-import 'package:bookly/core/utils/styles.dart';
-import 'package:bookly/core/widgets/custom_appbar.dart';
-import 'package:bookly/features/home/presentation/manager/feature_book/feature_book_cubit.dart';
 import 'package:bookly/features/home/presentation/manager/newest_books/newest_book_cubit.dart';
 import 'package:bookly/features/home/presentation/views/widgets/bestSellerItem.dart';
 import 'package:bookly/features/home/presentation/views/widgets/featureListView.dart';
+import 'package:bookly/features/home/presentation/views/widgets/shimmer_best_seller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../../core/utils/styles.dart';
+import '../../../../../core/widgets/custom_appbar.dart';
 
 class HomeBody extends StatelessWidget {
   const HomeBody({super.key});
@@ -56,24 +57,19 @@ class HomeBody extends StatelessWidget {
                 ),
               );
             } else {
-              return SliverToBoxAdapter(
-                child: Center(
-                  child: CircularProgressIndicator(),
+              return SliverList(
+                delegate: SliverChildBuilderDelegate(
+                  (context, index) => Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 10, horizontal: 24),
+                    child: ShimmerBestsellerItem(),
+                  ),
+                  childCount: 10,
                 ),
               );
             }
           },
-          // SliverList(
-          //   delegate: SliverChildBuilderDelegate(
-          //     (context, index) => Padding(
-          //       padding:
-          //           const EdgeInsets.symmetric(vertical: 10, horizontal: 24),
-          //       child: const BestsellerItem(),
-          //     ),
-          //     childCount: 10,
-          //   ),
-          // ),
-        )
+        ),
       ],
     );
   }

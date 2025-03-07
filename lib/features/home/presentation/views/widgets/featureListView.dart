@@ -1,3 +1,4 @@
+import 'package:bookly/features/home/presentation/views/widgets/shimmer_feature_iteam.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -31,9 +32,7 @@ class FeatureListview extends StatelessWidget {
             ),
           );
         } else {
-          return Center(
-            child: CircleAvatar(),
-          );
+          return ShimmerFeatureItem();
         }
       },
     );

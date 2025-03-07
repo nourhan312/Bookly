@@ -5,13 +5,14 @@ import '../../../data/models/book/book.dart';
 
 class BestsellerListview extends StatelessWidget {
   const BestsellerListview({super.key, required this.book});
+
   final Book book;
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
         padding: EdgeInsets.zero,
-        itemCount: 10,
+        itemCount: 20,
         itemBuilder: (context, index) {
           return Padding(
             padding: const EdgeInsets.symmetric(vertical: 10),
