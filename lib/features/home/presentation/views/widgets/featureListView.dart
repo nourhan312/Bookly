@@ -1,7 +1,9 @@
 import 'package:bookly/features/home/presentation/views/widgets/shimmer_feature_iteam.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../../../../core/utils/routes.dart';
 import '../../manager/feature_book/feature_book_cubit.dart';
 import 'listView_item.dart';
 
@@ -24,9 +26,15 @@ class FeatureListview extends StatelessWidget {
               itemCount: state.books.length,
               itemBuilder: (context, index) => Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: ListviewItem(
-                  imageUrl:
-                      state.books[index].volumeInfo!.imageLinks!.thumbnail!,
+                child: GestureDetector(
+                  onTap: () {
+                    GoRouter.of(context).push(AppRouter.kBookDetailsView,
+                        extra: state.books[index]);
+                  },
+                  child: ListviewItem(
+                    imageUrl:
+                        state.books[index].volumeInfo!.imageLinks!.thumbnail!,
+                  ),
                 ),
               ),
             ),

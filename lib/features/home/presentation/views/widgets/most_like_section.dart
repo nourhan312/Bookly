@@ -23,14 +23,19 @@ class MostLikeSection extends StatelessWidget {
               itemBuilder: (context, index) => Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: ListviewItem(
-                    widthRatio: 0.2,
+                    widthRatio: 0.23,
                     imageUrl:
                         state.books[index].volumeInfo!.imageLinks!.thumbnail!),
               ),
             ),
           );
         } else {
-          return ShimmerFeatureItem();
+          return Expanded(
+            child: ShimmerFeatureItem(
+              widthRatio: 0.23,
+              aspectRatio: 0.6,
+            ),
+          );
         }
       },
     );

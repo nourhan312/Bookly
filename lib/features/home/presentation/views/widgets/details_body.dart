@@ -27,7 +27,7 @@ class DetailsBody extends StatelessWidget {
       child: Column(
         children: [
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.07,
+            height: MediaQuery.of(context).size.height * 0.02,
           ),
           DetailsAppbar(),
           const SizedBox(height: 10),
@@ -43,12 +43,13 @@ class DetailsBody extends StatelessWidget {
               textAlign: TextAlign.center,
               book.volumeInfo!.title!,
               style: Styles.textStyle30.copyWith(
+                fontSize: 28,
                 fontWeight: FontWeight.bold,
                 fontFamily: kGtSectraFine,
               ),
             ),
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 7),
           Text(
             book.volumeInfo!.authors![0],
             style: Styles.textStyle20.copyWith(
@@ -57,12 +58,14 @@ class DetailsBody extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           BookRating(
-            rating: 4.5,
-            count: 100,
+            rating: book.volumeInfo!.averageRating ?? 0,
+            count: book.volumeInfo!.ratingsCount ?? 0,
           ),
-          const SizedBox(height: 20),
-          ButtonsSection(),
-          const SizedBox(height: 20),
+          const SizedBox(height: 15),
+          ButtonsSection(
+            book: book,
+          ),
+          const SizedBox(height: 15),
           Align(
             alignment: Alignment.centerLeft,
             child: Text(
@@ -70,7 +73,7 @@ class DetailsBody extends StatelessWidget {
               style: Styles.textStyle20,
             ),
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 8),
           MostLikeSection(),
           SizedBox(
             height: 20,
