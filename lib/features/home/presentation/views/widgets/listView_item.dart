@@ -17,7 +17,7 @@ class ListviewItem extends StatelessWidget {
           aspectRatio: 0.6,
           child: CachedNetworkImage(
             imageUrl: imageUrl,
-            fit: BoxFit.fitHeight,
+            fit: BoxFit.cover,
             errorWidget: (context, url, error) => Icon(Icons.error),
           ),
         ),

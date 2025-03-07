@@ -1,5 +1,4 @@
-import 'package:bookly/features/search/presentation/view/widgets/search_body.dart'
-    show SearchBody;
+import 'package:bookly/features/search/presentation/view/widgets/search_body.dart';
 import 'package:flutter/material.dart';
 
 import '../../../home/data/models/book/book.dart';

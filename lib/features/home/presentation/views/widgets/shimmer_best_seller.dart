@@ -1,9 +1,5 @@
-import 'package:bookly/core/utils/routes.dart';
-import 'package:bookly/features/home/presentation/views/widgets/book_rating.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:shimmer/shimmer.dart';
-
 
 class ShimmerBestsellerItem extends StatelessWidget {
   const ShimmerBestsellerItem({super.key});
@@ -13,10 +9,7 @@ class ShimmerBestsellerItem extends StatelessWidget {
     return Row(
       children: [
         SizedBox(
-          height: MediaQuery
-              .of(context)
-              .size
-              .height * 0.15,
+          height: MediaQuery.of(context).size.height * 0.15,
           child: ClipRRect(
             borderRadius: BorderRadius.circular(16),
             child: AspectRatio(
@@ -37,10 +30,7 @@ class ShimmerBestsellerItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
-                width: MediaQuery
-                    .of(context)
-                    .size
-                    .width * 0.5,
+                width: MediaQuery.of(context).size.width * 0.5,
                 child: Shimmer.fromColors(
                   baseColor: Colors.grey[300]!,
                   highlightColor: Colors.grey[100]!,

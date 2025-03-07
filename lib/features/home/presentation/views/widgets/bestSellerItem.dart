@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../../core/constant.dart';
 import '../../../../../core/utils/styles.dart';
-import '../../../data/models/book/book.dart';
+import 'package:bookly/features/home/data/models/book/book.dart';
 
 class BestsellerItem extends StatelessWidget {
   const BestsellerItem({
@@ -20,7 +20,7 @@ class BestsellerItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        GoRouter.of(context).push(AppRouter.kBookDetailsView);
+        GoRouter.of(context).push(AppRouter.kBookDetailsView, extra: book);
       },
       child: Row(
         children: [

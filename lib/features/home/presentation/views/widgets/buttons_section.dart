@@ -11,7 +11,7 @@ class ButtonsSection extends StatelessWidget {
       children: [
         CustomButton(
             onPressed: () {},
-            text: '19.555',
+            text: 'Free ',
             topLeft: 15,
             bottomLeft: 15,
             color: Colors.white,

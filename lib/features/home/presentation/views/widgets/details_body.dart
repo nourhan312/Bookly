@@ -6,10 +6,16 @@ import 'package:bookly/features/home/presentation/views/widgets/most_like_sectio
 import 'package:flutter/material.dart';
 
 import '../../../../../core/constant.dart';
+import '../../../data/models/book/book.dart';
 import 'listView_item.dart';
 
 class DetailsBody extends StatelessWidget {
-  const DetailsBody({super.key});
+  const DetailsBody({
+    super.key,
+    required this.book,
+  });
+
+  final Book book;
 
   @override
   Widget build(BuildContext context) {
@@ -26,23 +32,25 @@ class DetailsBody extends StatelessWidget {
           DetailsAppbar(),
           const SizedBox(height: 10),
           ListviewItem(
-            imageUrl:
-                'https://img-s-msn-com.akamaized.net/tenant/amp/entityid/BB1rlNr7.img?w=768&h=513&m=6&x=426&y=117&s=140&d=140',
+            imageUrl: book.volumeInfo!.imageLinks!.thumbnail!,
             widthRatio: 0.45,
           ),
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.02,
           ),
-          Text(
-            'Book Title',
-            style: Styles.textStyle30.copyWith(
-              fontWeight: FontWeight.bold,
-              fontFamily: kGtSectraFine,
+          Center(
+            child: Text(
+              textAlign: TextAlign.center,
+              book.volumeInfo!.title!,
+              style: Styles.textStyle30.copyWith(
+                fontWeight: FontWeight.bold,
+                fontFamily: kGtSectraFine,
+              ),
             ),
           ),
           const SizedBox(height: 10),
           Text(
-            'Author Name',
+            book.volumeInfo!.authors![0],
             style: Styles.textStyle20.copyWith(
               fontFamily: kGtSectraFine,
             ),
