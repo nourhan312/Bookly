@@ -1,38 +1,87 @@
-import 'package:bookly/core/utils/styles.dart';
-import 'package:bookly/features/search/presentation/view/widgets/custom_search_textfield.dart';
 import 'package:bookly/features/search/presentation/view/widgets/search_result_listview.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../home/data/models/book/book.dart';
+import '../../../../../core/utils/styles.dart';
+import '../../../../../core/widgets/custom_error.dart';
+import '../../../../../core/widgets/custom_loading.dart';
+import '../../manager/search_cubit/search_cubit.dart';
+import '../../manager/search_cubit/search_state.dart';
+import 'custom_search_appbar.dart';
 
-class SearchBody extends StatelessWidget {
-  const SearchBody({super.key, required this.book});
-
-  final Book book;
+class SearchViewBody extends StatelessWidget {
+  const SearchViewBody({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 25,
-        vertical: 16,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        spacing: 10,
-        children: [
-          CustomSearchTextfield(),
-          Text(
-            'Best Sellers',
-            style: Styles.textStyle20.copyWith(
-              fontWeight: FontWeight.bold,
+    return BlocBuilder<SearchCubit, SearchState>(
+      builder: (context, state) {
+        return CustomScrollView(
+          slivers: [
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.only(top: 30, right: 30, left: 2),
+                child: Column(
+                  children: [
+                    const CustomSearchAppBar(),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 30, left: 30),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          'Search Results',
+                          style: Styles.textStyle18.copyWith(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                  ],
+                ),
+              ),
             ),
-          ),
-          SearchResultListview(
-            book: book,
-          ),
-        ],
-      ),
+            state is SearchLoadingState
+                ? const SliverFillRemaining(
+                    child: Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: CustomLoadingIndicator(),
+                    ),
+                  )
+                : SliverFillRemaining(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 30),
+                      child: BlocBuilder<SearchCubit, SearchState>(
+                        builder: (context, state) {
+                          if (state is SearchSuccessState) {
+                            return SearchResultListview(
+                              searchBooksResult: state.books,
+                            );
+                          } else if (state is SearchLoadingState) {
+                            return const CustomLoadingIndicator();
+                          } else if (state is SearchInitial) {
+                            return Center(
+                              child: Image.asset(
+                                'assets/images/Animation.gif',
+                                height: 300,
+                                fit: BoxFit.fill,
+                              ),
+                            );
+                          } else {
+                            return CustomErrorWidget(
+                              errMessage: state is SearchFailureState
+                                  ? state.errorMessage
+                                  : 'An error occurred',
+                            );
+                          }
+                        },
+                      ),
+                    ),
+                  ),
+          ],
+        );
+      },
     );
   }
 }

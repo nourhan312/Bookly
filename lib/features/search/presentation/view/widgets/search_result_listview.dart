@@ -4,10 +4,9 @@ import '../../../../home/data/models/book/book.dart';
 import '../../../../home/presentation/views/widgets/bestSellerItem.dart';
 
 class SearchResultListview extends StatelessWidget {
-  const SearchResultListview({super.key, required this.book});
+  const SearchResultListview({super.key, required this.searchBooksResult});
 
-  final Book book;
-
+  final List<Book> searchBooksResult;
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -18,7 +17,7 @@ class SearchResultListview extends StatelessWidget {
               return Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 child: BestsellerItem(
-                  book: book,
+                  book: searchBooksResult[index],
                 ),
               );
             }));

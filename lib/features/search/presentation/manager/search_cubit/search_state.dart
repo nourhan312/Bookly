@@ -12,7 +12,9 @@ final class SearchInitial extends SearchState {}
 final class SearchLoadingState extends SearchState {}
 
 final class SearchSuccessState extends SearchState {
-  SearchSuccessState(this.books);
+  SearchSuccessState(this.books, this.searchQuery);
+
+  final String searchQuery;
 
   final List<Book> books;
 }
