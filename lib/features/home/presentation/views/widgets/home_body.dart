@@ -1,8 +1,11 @@
 import 'package:bookly/core/utils/styles.dart';
 import 'package:bookly/core/widgets/custom_appbar.dart';
+import 'package:bookly/features/home/presentation/manager/feature_book/feature_book_cubit.dart';
+import 'package:bookly/features/home/presentation/manager/newest_books/newest_book_cubit.dart';
 import 'package:bookly/features/home/presentation/views/widgets/bestSellerItem.dart';
 import 'package:bookly/features/home/presentation/views/widgets/featureListView.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeBody extends StatelessWidget {
   const HomeBody({super.key});
@@ -31,14 +34,45 @@ class HomeBody extends StatelessWidget {
             ),
           ),
         ),
-        SliverList(
-          delegate: SliverChildBuilderDelegate(
-            (context, index) => Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 24),
-              child: const BestsellerItem(),
-            ),
-            childCount: 10,
-          ),
+        BlocBuilder<NewestBookCubit, NewestBookState>(
+          builder: (context, state) {
+            if (state is NewestBookFailure) {
+              return SliverToBoxAdapter(
+                child: Center(
+                  child: Text(state.message),
+                ),
+              );
+            } else if (state is NewestBookSuccess) {
+              return SliverList(
+                delegate: SliverChildBuilderDelegate(
+                  (context, index) => Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 10, horizontal: 24),
+                    child: BestsellerItem(
+                      book: state.books[index],
+                    ),
+                  ),
+                  childCount: state.books.length,
+                ),
+              );
+            } else {
+              return SliverToBoxAdapter(
+                child: Center(
+                  child: CircularProgressIndicator(),
+                ),
+              );
+            }
+          },
+          // SliverList(
+          //   delegate: SliverChildBuilderDelegate(
+          //     (context, index) => Padding(
+          //       padding:
+          //           const EdgeInsets.symmetric(vertical: 10, horizontal: 24),
+          //       child: const BestsellerItem(),
+          //     ),
+          //     childCount: 10,
+          //   ),
+          // ),
         )
       ],
     );

@@ -1,14 +1,20 @@
-import 'package:bookly/core/utils/app_assets.dart';
 import 'package:bookly/core/utils/routes.dart';
 import 'package:bookly/features/home/presentation/views/widgets/book_rating.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../../core/constant.dart';
 import '../../../../../core/utils/styles.dart';
+import '../../../data/models/book/book.dart';
 
 class BestsellerItem extends StatelessWidget {
-  const BestsellerItem({super.key});
+  const BestsellerItem({
+    super.key,
+    required this.book,
+  });
+
+  final Book book;
 
   @override
   Widget build(BuildContext context) {
@@ -20,20 +26,32 @@ class BestsellerItem extends StatelessWidget {
         children: [
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.15,
-            child: AspectRatio(
-              aspectRatio: 0.63,
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(16),
-                  image: DecorationImage(
-                    image: AssetImage(AppAssets.testImage),
-                    fit: BoxFit.cover,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(16),
+              child: AspectRatio(
+                aspectRatio: 0.63,
+                child: CachedNetworkImage(
+                  imageUrl: book.volumeInfo!.imageLinks!.thumbnail!,
+                  fit: BoxFit.cover,
+                  errorWidget: (context, url, error) => Center(
+                    child: Icon(Icons.error),
                   ),
                 ),
               ),
             ),
           ),
+
+          // Container(
+          //   decoration: BoxDecoration(
+          //     color: Colors.white,
+          //     borderRadius: BorderRadius.circular(16),
+          //     image: DecorationImage(
+          //       image: AssetImage(AppAssets.testImage),
+          //       fit: BoxFit.cover,
+          //     ),
+          //   ),
+          // ),
+
           SizedBox(width: 30),
           Expanded(
             child: Column(
@@ -44,7 +62,7 @@ class BestsellerItem extends StatelessWidget {
                   child: Text(
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
-                    'Harry Potter and the Philosopher\'s Stone',
+                    book.volumeInfo!.title!,
                     style: Styles.textStyle20.copyWith(
                       fontWeight: FontWeight.bold,
                       fontFamily: kGtSectraFine,
@@ -53,7 +71,7 @@ class BestsellerItem extends StatelessWidget {
                 ),
                 SizedBox(height: 3),
                 Text(
-                  'F. Scott Fitzgerald',
+                  book.volumeInfo!.authors!.first,
                   style: Styles.textStyle14.copyWith(
                     fontFamily: kGtSectraFine,
                   ),
@@ -63,11 +81,14 @@ class BestsellerItem extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      '20 ',
+                      'Free ',
                       style: Styles.textStyle20
                           .copyWith(fontWeight: FontWeight.bold),
                     ),
-                    BookRating(),
+                    BookRating(
+                      count: book.volumeInfo!.ratingsCount ?? 0,
+                      rating: book.volumeInfo!.averageRating ?? 0,
+                    ),
                   ],
                 ),
               ],

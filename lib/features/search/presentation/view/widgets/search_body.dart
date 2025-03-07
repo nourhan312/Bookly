@@ -3,8 +3,12 @@ import 'package:bookly/features/search/presentation/view/widgets/custom_search_t
 import 'package:bookly/features/search/presentation/view/widgets/search_result_listview.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../home/data/models/book/book.dart';
+
 class SearchBody extends StatelessWidget {
-  const SearchBody({super.key});
+  const SearchBody({super.key, required this.book});
+
+  final Book book;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +28,9 @@ class SearchBody extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          SearchResultListview(),
+          SearchResultListview(
+            book: book,
+          ),
         ],
       ),
     );

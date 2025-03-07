@@ -48,7 +48,10 @@ class DetailsBody extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 10),
-          BookRating(),
+          BookRating(
+            rating: 4.5,
+            count: 100,
+          ),
           const SizedBox(height: 20),
           ButtonsSection(),
           const SizedBox(height: 20),

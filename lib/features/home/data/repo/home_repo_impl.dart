@@ -3,7 +3,6 @@ import 'package:bookly/core/utils/api_server.dart';
 import 'package:bookly/features/home/data/models/book/book.dart';
 import 'package:bookly/features/home/data/repo/home_repo.dart';
 import 'package:dartz/dartz.dart';
-import 'package:dio/dio.dart';
 
 class HomeRepoImpl implements HomeRepo {
   final ApiServer apiServer;
@@ -27,7 +26,7 @@ class HomeRepoImpl implements HomeRepo {
     try {
       var data = await apiServer.get(
           endpoint:
-              'volumes?Filtering=free-ebooks&q=subject:programming&Sorting=newest');
+              'volumes?Filtering=free-ebooks&Sorting=newest &q=computer science');
       List books = data['items'];
       return Right(books.map((e) => Book.fromJson(e)).toList());
     } catch (e) {
