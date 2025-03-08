@@ -13,7 +13,7 @@ class SearchCubit extends Cubit<SearchState> {
     final response = await searchRepo.searchBooks(query: query);
     response.fold(
       (failure) => emit(SearchFailureState(failure.toString())),
-      (books) => emit(SearchSuccessState(books, query)),
+      (booksList) => emit(SearchSuccessState(booksList, query)),
     );
   }
 }

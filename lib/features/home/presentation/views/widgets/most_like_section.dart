@@ -23,7 +23,7 @@ class MostLikeSection extends StatelessWidget {
               itemBuilder: (context, index) => Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: ListviewItem(
-                    widthRatio: 0.23,
+                    widthRatio: 0.32,
                     imageUrl:
                         state.books[index].volumeInfo!.imageLinks!.thumbnail!),
               ),
@@ -32,7 +32,7 @@ class MostLikeSection extends StatelessWidget {
         } else {
           return Expanded(
             child: ShimmerFeatureItem(
-              widthRatio: 0.23,
+              widthRatio: 0.32,
               aspectRatio: 0.6,
             ),
           );

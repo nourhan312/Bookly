@@ -33,7 +33,8 @@ class DetailsBody extends StatelessWidget {
           const SizedBox(height: 10),
           ListviewItem(
             imageUrl: book.volumeInfo!.imageLinks!.thumbnail!,
-            widthRatio: 0.45,
+            widthRatio: 0.56,
+            aspectRatio: 0.69,
           ),
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.02,
